@@ -1,0 +1,9 @@
+date,home_team,away_team,home_goals,away_goals
+2025-08-01,Alpha,Beta,2,0
+2025-08-08,Beta,Gamma,1,1
+2025-08-15,Gamma,Alpha,0,2
+2025-08-22,Alpha,Gamma,1,1
+2025-08-29,Beta,Alpha,0,1
+2025-09-05,Gamma,Beta,2,1
+2025-09-12,Alpha,Beta,3,1
+2025-09-19,Beta,Gamma,2,2
