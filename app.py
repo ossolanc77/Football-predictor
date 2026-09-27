@@ -51,37 +51,31 @@ else:
 
 st.subheader("📊 Datos recientes")
 
-col1, col2 = st.columns(2)
+# Calcular automáticamente los datos de los equipos
+partidos_local = datos[datos["HomeTeam"] == local].tail(10)
+partidos_visit = datos[datos["AwayTeam"] == visitante].tail(10)
 
-with col1:
-    st.markdown(f"### {local}")
-    gf_local = st.number_input(
-        "Goles a favor por partido (local)",
-        min_value=0.0,
-        value=1.30,
-        step=0.1
-    )
-    gc_local = st.number_input(
-        "Goles recibidos por partido (local)",
-        min_value=0.0,
-        value=1.00,
-        step=0.1
-    )
+if not partidos_local.empty:
+    gf_local = partidos_local["FTHG"].mean()
+    gc_local = partidos_local["FTAG"].mean()
+else:
+    gf_local = 1.30
+    gc_local = 1.00
 
-with col2:
-    st.markdown(f"### {visitante}")
-    gf_visit = st.number_input(
-        "Goles a favor por partido (visitante)",
-        min_value=0.0,
-        value=1.10,
-        step=0.1
-    )
-    gc_visit = st.number_input(
-        "Goles recibidos por partido (visitante)",
-        min_value=0.0,
-        value=1.30,
-        step=0.1
-    )
+if not partidos_visit.empty:
+    gf_visit = partidos_visit["FTAG"].mean()
+    gc_visit = partidos_visit["FTHG"].mean()
+else:
+    gf_visit = 1.10
+    gc_visit = 1.30
+
+st.write(f"**{local} como local:**")
+st.write(f"⚽ Goles a favor: **{gf_local:.2f}**")
+st.write(f"🛡️ Goles recibidos: **{gc_local:.2f}**")
+
+st.write(f"**{visitante} como visitante:**")
+st.write(f"⚽ Goles a favor: **{gf_visit:.2f}**")
+st.write(f"🛡️ Goles recibidos: **{gc_visit:.2f}**")
 
 def poisson(k, lam):
     return math.exp(-lam) * (lam ** k) / math.factorial(k)
