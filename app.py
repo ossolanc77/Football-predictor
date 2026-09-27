@@ -26,8 +26,28 @@ def cargar_datos(liga):
     return load_history(liga, temporadas)
 
 datos = cargar_datos(liga)
-local = st.text_input("Equipo local", "Valladolid")
-visitante = st.text_input("Equipo visitante", "Córdoba")
+if not datos.empty:
+    equipos = sorted(
+        set(datos["HomeTeam"].dropna()) |
+        set(datos["AwayTeam"].dropna())
+    )
+
+    local = st.selectbox(
+        "Equipo local",
+        equipos,
+        index=0
+    )
+
+    equipos_visitantes = [e for e in equipos if e != local]
+
+    visitante = st.selectbox(
+        "Equipo visitante",
+        equipos_visitantes,
+        index=0
+    )
+else:
+    st.error("No se pudieron cargar los datos históricos.")
+    st.stop()
 
 st.subheader("📊 Datos recientes")
 
