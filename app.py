@@ -15,6 +15,17 @@ liga = st.selectbox(
     "Competición",
     ["Primera División", "Segunda División"]
 )
+
+temporadas = [
+    "2526", "2425", "2324", "2223", "2122",
+    "2021", "1920", "1819", "1718", "1617"
+]
+
+@st.cache_data(ttl=3600)
+def cargar_datos(liga):
+    return load_history(liga, temporadas)
+
+datos = cargar_datos(liga)
 local = st.text_input("Equipo local", "Valladolid")
 visitante = st.text_input("Equipo visitante", "Córdoba")
 
