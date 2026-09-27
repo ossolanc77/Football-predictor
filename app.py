@@ -1,6 +1,6 @@
 import streamlit as st
 import math
-
+from historical_data import load_history
 st.set_page_config(
     page_title="Football Predictor",
     page_icon="⚽",
