@@ -11,7 +11,10 @@ st.title("⚽ Football Predictor")
 st.caption("Predicción de partidos reales")
 
 st.subheader("🏟️ Partido")
-
+liga = st.selectbox(
+    "Competición",
+    ["Primera División", "Segunda División"]
+)
 local = st.text_input("Equipo local", "Valladolid")
 visitante = st.text_input("Equipo visitante", "Córdoba")
 
